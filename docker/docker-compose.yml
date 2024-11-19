@@ -1,18 +1,20 @@
-version: "3"
 services:
   etcd1:
     container_name: etcd1
     image: quay.io/coreos/etcd:v3.5.0
-    command:
-      - etcd
-      - --name=etcd1
-      - --initial-advertise-peer-urls=http://etcd1:2380
-      - --listen-peer-urls=http://0.0.0.0:2380
-      - --listen-client-urls=http://0.0.0.0:2379
-      - --advertise-client-urls=http://etcd1:2379
-      - --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
-      - --initial-cluster-state=new
-      - --initial-cluster-token=etcd-cluster-1
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      apt-get update && apt-get install -y iproute2 &&
+      etcd --name=etcd1
+      --initial-advertise-peer-urls=http://etcd1:2380
+      --listen-peer-urls=http://0.0.0.0:2380
+      --listen-client-urls=http://0.0.0.0:2379
+      --advertise-client-urls=http://etcd1:2379
+      --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
+      --initial-cluster-state=new
+      --initial-cluster-token=etcd-cluster-1
+      "
     ports:
       - "2379:2379"
     networks:
@@ -21,64 +23,76 @@ services:
   etcd2:
     container_name: etcd2
     image: quay.io/coreos/etcd:v3.5.0
-    command:
-      - etcd
-      - --name=etcd2
-      - --initial-advertise-peer-urls=http://etcd2:2380
-      - --listen-peer-urls=http://0.0.0.0:2380
-      - --listen-client-urls=http://0.0.0.0:2379
-      - --advertise-client-urls=http://etcd2:2379
-      - --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
-      - --initial-cluster-state=new
-      - --initial-cluster-token=etcd-cluster-1
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      apt-get update && apt-get install -y iproute2 &&
+      etcd --name=etcd2
+      --initial-advertise-peer-urls=http://etcd2:2380
+      --listen-peer-urls=http://0.0.0.0:2380
+      --listen-client-urls=http://0.0.0.0:2379
+      --advertise-client-urls=http://etcd2:2379
+      --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
+      --initial-cluster-state=new
+      --initial-cluster-token=etcd-cluster-1
+      "
     networks:
       - etcd-net
 
   etcd3:
     container_name: etcd3
     image: quay.io/coreos/etcd:v3.5.0
-    command:
-      - etcd
-      - --name=etcd3
-      - --initial-advertise-peer-urls=http://etcd3:2380
-      - --listen-peer-urls=http://0.0.0.0:2380
-      - --listen-client-urls=http://0.0.0.0:2379
-      - --advertise-client-urls=http://etcd3:2379
-      - --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
-      - --initial-cluster-state=new
-      - --initial-cluster-token=etcd-cluster-1
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      apt-get update && apt-get install -y iproute2 &&
+      etcd --name=etcd3
+      --initial-advertise-peer-urls=http://etcd3:2380
+      --listen-peer-urls=http://0.0.0.0:2380
+      --listen-client-urls=http://0.0.0.0:2379
+      --advertise-client-urls=http://etcd3:2379
+      --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
+      --initial-cluster-state=new
+      --initial-cluster-token=etcd-cluster-1
+      "
     networks:
       - etcd-net
 
   etcd4:
     container_name: etcd4
     image: quay.io/coreos/etcd:v3.5.0
-    command:
-      - etcd
-      - --name=etcd4
-      - --initial-advertise-peer-urls=http://etcd4:2380
-      - --listen-peer-urls=http://0.0.0.0:2380
-      - --listen-client-urls=http://0.0.0.0:2379
-      - --advertise-client-urls=http://etcd4:2379
-      - --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
-      - --initial-cluster-state=new
-      - --initial-cluster-token=etcd-cluster-1
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      apt-get update && apt-get install -y iproute2 &&
+      etcd --name=etcd4
+      --initial-advertise-peer-urls=http://etcd4:2380
+      --listen-peer-urls=http://0.0.0.0:2380
+      --listen-client-urls=http://0.0.0.0:2379
+      --advertise-client-urls=http://etcd4:2379
+      --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
+      --initial-cluster-state=new
+      --initial-cluster-token=etcd-cluster-1
+      "
     networks:
       - etcd-net
 
   etcd5:
     container_name: etcd5
     image: quay.io/coreos/etcd:v3.5.0
-    command:
-      - etcd
-      - --name=etcd5
-      - --initial-advertise-peer-urls=http://etcd5:2380
-      - --listen-peer-urls=http://0.0.0.0:2380
-      - --listen-client-urls=http://0.0.0.0:2379
-      - --advertise-client-urls=http://etcd5:2379
-      - --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
-      - --initial-cluster-state=new
-      - --initial-cluster-token=etcd-cluster-1
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      apt-get update && apt-get install -y iproute2 &&
+      etcd --name=etcd5
+      --initial-advertise-peer-urls=http://etcd5:2380
+      --listen-peer-urls=http://0.0.0.0:2380
+      --listen-client-urls=http://0.0.0.0:2379
+      --advertise-client-urls=http://etcd5:2379
+      --initial-cluster=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380,etcd4=http://etcd4:2380,etcd5=http://etcd5:2380
+      --initial-cluster-state=new
+      --initial-cluster-token=etcd-cluster-1
+      "
     networks:
       - etcd-net
 
