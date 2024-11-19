@@ -19,6 +19,8 @@ services:
       - "2379:2379"
     networks:
       - etcd-net
+    cap_add:
+      - NET_ADMIN
 
   etcd2:
     container_name: etcd2
@@ -38,6 +40,8 @@ services:
       "
     networks:
       - etcd-net
+    cap_add:
+      - NET_ADMIN
 
   etcd3:
     container_name: etcd3
@@ -57,6 +61,8 @@ services:
       "
     networks:
       - etcd-net
+    cap_add:
+      - NET_ADMIN
 
   etcd4:
     container_name: etcd4
@@ -76,6 +82,8 @@ services:
       "
     networks:
       - etcd-net
+    cap_add:
+      - NET_ADMIN
 
   etcd5:
     container_name: etcd5
@@ -95,6 +103,8 @@ services:
       "
     networks:
       - etcd-net
+    cap_add:
+      - NET_ADMIN
 
   prometheus:
     container_name: prometheus
