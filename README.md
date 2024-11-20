@@ -137,6 +137,21 @@ cd etcd
                        :aot :all}})
 ```
 
+# Managing Test Results
+
+## 1. Prepare Store Directory
+
+Inside the control container:
+
+```bash
+# Navigate to etcd directory
+cd /jepsen/etcd
+
+# Create and set permissions for store directory
+mkdir -p store
+chmod 777 store
+```
+
 # Running Tests
 
 ## Basic test:
@@ -155,4 +170,34 @@ lein run test --workload register --nemesis partition,clock --time-limit 60
 
 ```bash
 lein run test-all --concurrency 10 --rate 1000
+```
+
+# Package Test Results
+
+## Inside the control container:
+
+# Install zip
+
+```bash
+apt-get update
+apt-get install -y zip
+
+# Navigate to store directory
+
+cd /jepsen/etcd/store
+
+# Create zip file of results -- NOTICE! dir might be different name
+zip -r test_results.zip "etcd 3.5.15 register jetcd partition,clock"
+```
+
+# Download Results
+
+## From your MacBook terminal (not in the container):
+
+```bash
+# Copy zip file from container to local machine
+docker cp "jepsen-control:/jepsen/etcd/store/test_results.zip" .
+
+# Unzip the results
+unzip test_results.zip
 ```
