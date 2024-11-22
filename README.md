@@ -152,6 +152,43 @@ mkdir -p store
 chmod 777 store
 ```
 
+# Injecting Latency
+
+```bash
+# From control node
+ping n1
+```
+
+2. Add latency to all nodes:
+
+```bash
+# Connect to each node (n1-n5)
+docker exec -it jepsen-n1 bash
+
+# Install tc
+apt-get update
+apt-get install -y iproute2
+
+# Add 150ms latency
+tc qdisc add dev eth0 root netem delay 150ms
+
+# Verify the rule
+tc qdisc show dev eth0
+```
+
+3. Verify new latency:
+
+```bash
+# From control node
+ping n1    # Should show ~150ms
+```
+
+We should see:
+
+- Higher latency quantiles (~150ms added to all operations)
+- Lower throughput in the rate graph
+- More spread in the raw latency plot
+
 # Running Tests
 
 ## Basic test:

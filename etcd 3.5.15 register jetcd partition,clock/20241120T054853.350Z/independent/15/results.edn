@@ -1,0 +1,27 @@
+{:linear
+ {:valid? true,
+  :configs
+  ({:model {:version 48, :value 1},
+    :last-op
+    {:process 5,
+     :type :ok,
+     :f :write,
+     :value [48 1],
+     :index 6401,
+     :time 30771976941},
+    :pending
+    [{:process 47,
+      :type :invoke,
+      :f :cas,
+      :value [nil [4 3]],
+      :index 6124,
+      :time 29005139080}
+     {:process 48,
+      :type :invoke,
+      :f :write,
+      :value [nil 0],
+      :index 6128,
+      :time 29056712665}]}),
+  :final-paths ()},
+ :timeline {:valid? true},
+ :valid? true}
