@@ -144,6 +144,9 @@ cd etcd
 Inside the control container:
 
 ```bash
+# pull the repository
+git clone https://github.com/jepsen-io/etcd.git
+
 # Navigate to etcd directory
 cd /jepsen/etcd
 
@@ -192,6 +195,8 @@ We should see:
 # Running Tests
 
 ## Basic test:
+
+clear the store
 
 ```bash
 lein run test --workload register --time-limit 60
